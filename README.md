@@ -1,1 +1,1 @@
-## Instrução para Execução
+## Instruções para Execução
