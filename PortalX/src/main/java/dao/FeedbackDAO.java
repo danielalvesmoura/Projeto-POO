@@ -1,32 +1,29 @@
 package dao;
 
+import model.Feedback;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import javax.persistence.Persistence;
-
 import java.util.List;
-import java.util.ArrayList;
 
-import model.Evento;
-
-public class EventoDAO {
+public class FeedbackDAO {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenciaPU");
 
-    public void inserir(Evento evento) {
+    public void inserir(Feedback feedback) {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        em.persist(evento);
+        em.persist(feedback);
         em.getTransaction().commit();
         em.close();
 
     }
 
-    public List<Evento> listarTodos() {
+    public List<Feedback> listarTodos() {
         EntityManager em = emf.createEntityManager();
 
-        List<Evento> lista = em.createQuery("SELECT e FROM Evento e", Evento.class).getResultList();
+        List<Feedback> lista = em.createQuery("SELECT f FROM Feedback f", Feedback.class).getResultList();
 
         em.close();
 

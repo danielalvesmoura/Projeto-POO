@@ -1,32 +1,29 @@
 package dao;
 
+import model.Inscricao;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import javax.persistence.Persistence;
-
 import java.util.List;
-import java.util.ArrayList;
 
-import model.Evento;
-
-public class EventoDAO {
+public class InscricaoDAO {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenciaPU");
 
-    public void inserir(Evento evento) {
+    public void inserir(Inscricao inscricao) {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        em.persist(evento);
+        em.persist(inscricao);
         em.getTransaction().commit();
         em.close();
 
     }
 
-    public List<Evento> listarTodos() {
+    public List<Inscricao> listarTodos() {
         EntityManager em = emf.createEntityManager();
 
-        List<Evento> lista = em.createQuery("SELECT e FROM Evento e", Evento.class).getResultList();
+        List<Inscricao> lista = em.createQuery("SELECT f FROM Feedback f", Inscricao.class).getResultList();
 
         em.close();
 
