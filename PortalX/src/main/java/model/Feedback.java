@@ -15,6 +15,8 @@ public class Feedback {
     @Column(length = 100)
     private int nota;
     private String comentario;
+
+    @Temporal(TemporalType.DATE)
     private Date dataEnvio;
 
     public long getId() {

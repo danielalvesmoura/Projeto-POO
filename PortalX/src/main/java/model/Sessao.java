@@ -16,9 +16,11 @@ public class Sessao {
     @Column(length = 100)
     private String titulo;
     private String descricao;
-    private LocalTime horaInicio;
-    private LocalTime horaFim;
     private Enum tipo;
+
+    @Temporal(TemporalType.TIME)
+    private Date horaInicio;
+    private Date horaFim;
 
     public long getId() {
         return id;
@@ -40,19 +42,19 @@ public class Sessao {
         this.descricao = descricao;
     }
 
-    public LocalTime getHoraInicio() {
+    public Date getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(LocalTime horaInicio) {
+    public void setHoraInicio(Date horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public LocalTime getHoraFim() {
+    public Date getHoraFim() {
         return horaFim;
     }
 
-    public void setHoraFim(LocalTime horaFim) {
+    public void setHoraFim(Date horaFim) {
         this.horaFim = horaFim;
     }
 

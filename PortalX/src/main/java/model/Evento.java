@@ -15,9 +15,11 @@ public class Evento {
     @Column(length = 100)
     private String nome;
     private String descricao;
+    private String endereco;
+
+    @Temporal(TemporalType.DATE)
     private Date dataInicio;
     private Date dataFim;
-    private String endereco;
 
     public long getId() {
         return id;

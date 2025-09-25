@@ -21,7 +21,6 @@ public class Main {
             System.out.println("Deseja continuar? [1] Sim, [2] Não");
 
             opcao = 0;
-
             while(true) {
                 try {
                     opcao = scanner.nextInt();

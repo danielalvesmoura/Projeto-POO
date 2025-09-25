@@ -13,9 +13,11 @@ public class Inscricao {
     private long id;
 
     @Column(length = 100)
-    private Date dataCriacao;
     private Enum status;
     private Enum tipoIngresso;
+
+    @Temporal(TemporalType.DATE)
+    private Date dataCriacao;
 
     public long getId() {
         return id;

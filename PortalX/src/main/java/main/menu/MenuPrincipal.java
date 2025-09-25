@@ -11,7 +11,6 @@ public class MenuPrincipal {
         System.out.println("[1] Cadastrar");
 
         int opcao = 0;
-
         while(true) {
             try {
                 opcao = scanner.nextInt();
@@ -32,7 +31,8 @@ public class MenuPrincipal {
     }
 
     public void menuCadastro() {
-
+        System.out.println("Quer cadastrar o que?");
+        System.out.println("[1] Evento");
     }
 
 
