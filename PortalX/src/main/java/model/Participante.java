@@ -6,45 +6,24 @@ import java.util.Date;
 
 @Entity
 @Table(name = "participante")
-public class Participante {
+public class Participante extends Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(length = 100)
-    private String nomeCompleto;
-    private String email;
-    private String telefone;
     private String empresa;
     private String cargo;
 
+    public Participante(String nomeCompleto, String email, String telefone, String empresa, String cargo) {
+        super(nomeCompleto, email, telefone);
+        this.empresa = empresa;
+        this.cargo = cargo;
+    }
+
     public long getId() {
         return id;
-    }
-
-    public String getNomeCompleto() {
-        return nomeCompleto;
-    }
-
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getEmpresa() {

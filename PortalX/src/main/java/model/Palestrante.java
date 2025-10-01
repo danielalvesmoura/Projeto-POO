@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "palestrante")
-public class Palestrante {
+public class Palestrante extends Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +16,13 @@ public class Palestrante {
     private String biografia;
     private String especialidade;
     private String curriculo;
+
+    public Palestrante(String nomeCompleto, String email, String telefone, String biografia, String especialidade, String curriculo) {
+        super(nomeCompleto, email, telefone);
+        this.biografia = biografia;
+        this.especialidade = especialidade;
+        this.curriculo = curriculo;
+    }
 
     public long getId() {
         return id;

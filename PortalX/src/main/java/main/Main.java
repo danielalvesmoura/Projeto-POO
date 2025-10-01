@@ -2,6 +2,7 @@ package main;
 
 import main.menu.*;
 
+import javax.swing.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -9,33 +10,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main main = new Main();
+        JFrame frame = new JFrame("Uma janela ae");
+        frame.setSize(300,300);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Scanner scanner = new Scanner(System.in);
-        int opcao = 0;
+        JButton botaoCadastro = new JButton("Cadastrar");
 
-        while(opcao != 2) {
-            MenuPrincipal menuPrincipal = new MenuPrincipal();
-            menuPrincipal.menuAcao();
+        botaoCadastro.addActionListener(e -> {
+            JOptionPane.showMessageDialog();
+        });
 
-            System.out.println("Deseja continuar? [1] Sim, [2] Não");
+        frame.getContentPane().add(botaoCadastro);
 
-            opcao = 0;
-            while(true) {
-                try {
-                    opcao = scanner.nextInt();
-                    if(opcao != 1 && opcao != 2) {
-                        System.out.println("Resposta inválida. Tente novamente:");
-                    } else {
-                        break;
-                    }
-                } catch(InputMismatchException e) {
-                    System.out.println("Resposta inválida. Tente novamente:");
-                    scanner = new Scanner(System.in);
-                }
-            }
-
-        }
+        frame.setVisible(true);
     }
 
 
