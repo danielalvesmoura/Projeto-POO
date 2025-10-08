@@ -23,8 +23,10 @@ public class JavaFX extends Application {
     private void menuInicial() {
         Label titulo = new Label("Portal X");
         titulo.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
+
         HBox topBar = new HBox(titulo);
         topBar.setStyle("-fx-background-color: #2c3e50; -fx-padding: 15;");
+
         topBar.setAlignment(Pos.CENTER_LEFT);
 
         Button btnCadastro = new Button("Cadastros");
@@ -37,6 +39,7 @@ public class JavaFX extends Application {
 
         Label mensagem = new Label("Bem-vindo ao sistema!");
         mensagem.setStyle("-fx-font-size: 16px;");
+
         StackPane centro = new StackPane(mensagem);
         centro.setPadding(new Insets(20));
 
@@ -54,8 +57,10 @@ public class JavaFX extends Application {
     private void menuCadastro() {
         Label titulo = new Label("Cadastros");
         titulo.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
+
         HBox topBar = new HBox(titulo);
         topBar.setStyle("-fx-background-color: #2c3e50; -fx-padding: 15;");
+
         topBar.setAlignment(Pos.CENTER_LEFT);
 
         VBox sideBar = new VBox(10);
@@ -111,14 +116,22 @@ public class JavaFX extends Application {
         btnVoltar.setOnAction(e -> menuCadastro());
         sideBar.getChildren().add(btnVoltar);
 
-        Label label = new Label("Nome do " + tipoCadastro + ":");
-        TextField campoNome = new TextField();
-        campoNome.setPromptText("Digite o nome");
 
         Button btnSalvar = new Button("Salvar");
-        btnSalvar.setOnAction(e -> System.out.println(tipoCadastro + " salvo: " + campoNome.getText()));
+        btnSalvar.setOnAction(e -> System.out.println(tipoCadastro + " salvo"));
 
-        VBox centro = new VBox(15, label, campoNome, btnSalvar);
+        VBox centro;
+
+        if(tipoCadastro.equals("Evento")) {
+            centro = camposEvento(btnSalvar, tipoCadastro);
+        } else if(tipoCadastro.equals("Sala")) {
+            centro = camposEvento(btnSalvar, tipoCadastro);
+        } else if(tipoCadastro.equals("Palestrante")) {
+            centro = camposEvento(btnSalvar, tipoCadastro);
+        } else {
+            centro = camposEvento(btnSalvar, tipoCadastro);
+        }
+
         centro.setAlignment(Pos.CENTER_LEFT);
         centro.setPadding(new Insets(20));
 
@@ -128,6 +141,66 @@ public class JavaFX extends Application {
         layout.setCenter(centro);
 
         stage.setScene(new Scene(layout, 600, 400));
+    }
+
+    public VBox camposEvento(Button btnSalvar, String tipoCadastro) {
+        Label nome = new Label("Nome do " + tipoCadastro + ":");
+        TextField campoNome = new TextField();
+        campoNome.setPromptText("Digite o nome");
+
+        Label descricao = new Label("Descrição do " + tipoCadastro + ":");
+        TextField campoDescricao = new TextField();
+        campoNome.setPromptText("Digite a descrição");
+
+        Label endereco = new Label("Endereço do " + tipoCadastro + ":");
+        TextField campoEndereco = new TextField();
+        campoNome.setPromptText("Digite o endereço");
+
+        return new VBox(15, nome, campoNome, descricao, campoDescricao, endereco, campoEndereco, btnSalvar);
+    }
+
+    public VBox camposSala(Button btnSalvar, String tipoCadastro) {
+        Label nome = new Label("Nome do " + tipoCadastro + ":");
+        TextField campoNome = new TextField();
+        campoNome.setPromptText("Digite o nome");
+
+        Label capacidade = new Label("Capacidade da " + tipoCadastro + ":");
+        TextField campoCapacidade = new TextField();
+        campoNome.setPromptText("Digite a capacidade");
+
+        Label localizacao = new Label("Localização da " + tipoCadastro + ":");
+        TextField campoLocalizacao = new TextField();
+        campoNome.setPromptText("Digite a localização");
+
+        return new VBox(15, nome, campoNome, capacidade, campoCapacidade, localizacao, campoLocalizacao, btnSalvar);
+    }
+
+    public VBox camposPalestrante(Button btnSalvar, String tipoCadastro) {
+        Label nome = new Label("Nome do " + tipoCadastro + ":");
+        TextField campoNome = new TextField();
+        campoNome.setPromptText("Digite o nome completo");
+
+        Label email = new Label("Email do " + tipoCadastro + ":");
+        TextField campoEmail = new TextField();
+        campoNome.setPromptText("Digite o email");
+
+        Label telefone = new Label("Telefone do " + tipoCadastro + ":");
+        TextField campoTelefone = new TextField();
+        campoNome.setPromptText("Digite o telefone");
+
+        Label biografia = new Label("Biografia do " + tipoCadastro + ":");
+        TextField campoBiografia = new TextField();
+        campoNome.setPromptText("Digite a biografia");
+
+        Label especialidade = new Label("Email do " + tipoCadastro + ":");
+        TextField campoEmail = new TextField();
+        campoNome.setPromptText("Digite o email");
+
+        Label curriculo = new Label("Telefone do " + tipoCadastro + ":");
+        TextField campoTelefone = new TextField();
+        campoNome.setPromptText("Digite o telefone");
+
+        return new VBox(15, nome, campoNome, capacidade, campoCapacidade, localizacao, campoLocalizacao, btnSalvar);
     }
 
 }

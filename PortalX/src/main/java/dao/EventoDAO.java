@@ -10,26 +10,10 @@ import java.util.ArrayList;
 
 import model.Evento;
 
-public class EventoDAO {
+
+
+public class EventoDAO extends DAOImplementacao<Evento, Long> {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenciaPU");
 
-    public void inserir(Evento evento) {
-        EntityManager em = emf.createEntityManager();
 
-        em.getTransaction().begin();
-        em.persist(evento);
-        em.getTransaction().commit();
-        em.close();
-
-    }
-
-    public List<Evento> listarTodos() {
-        EntityManager em = emf.createEntityManager();
-
-        List<Evento> lista = em.createQuery("SELECT e FROM Evento e", Evento.class).getResultList();
-
-        em.close();
-
-        return lista;
-    }
 }
