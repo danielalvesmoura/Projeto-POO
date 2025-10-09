@@ -125,11 +125,11 @@ public class JavaFX extends Application {
         if(tipoCadastro.equals("Evento")) {
             centro = camposEvento(btnSalvar, tipoCadastro);
         } else if(tipoCadastro.equals("Sala")) {
-            centro = camposEvento(btnSalvar, tipoCadastro);
+            centro = camposSala(btnSalvar, tipoCadastro);
         } else if(tipoCadastro.equals("Palestrante")) {
-            centro = camposEvento(btnSalvar, tipoCadastro);
+            centro = camposPalestrante(btnSalvar, tipoCadastro);
         } else {
-            centro = camposEvento(btnSalvar, tipoCadastro);
+            centro = camposSessao(btnSalvar, tipoCadastro);
         }
 
         centro.setAlignment(Pos.CENTER_LEFT);
@@ -150,11 +150,11 @@ public class JavaFX extends Application {
 
         Label descricao = new Label("Descrição do " + tipoCadastro + ":");
         TextField campoDescricao = new TextField();
-        campoNome.setPromptText("Digite a descrição");
+        campoDescricao.setPromptText("Digite a descrição");
 
         Label endereco = new Label("Endereço do " + tipoCadastro + ":");
         TextField campoEndereco = new TextField();
-        campoNome.setPromptText("Digite o endereço");
+        campoEndereco.setPromptText("Digite o endereço");
 
         return new VBox(15, nome, campoNome, descricao, campoDescricao, endereco, campoEndereco, btnSalvar);
     }
@@ -166,11 +166,11 @@ public class JavaFX extends Application {
 
         Label capacidade = new Label("Capacidade da " + tipoCadastro + ":");
         TextField campoCapacidade = new TextField();
-        campoNome.setPromptText("Digite a capacidade");
+        campoCapacidade.setPromptText("Digite a capacidade");
 
         Label localizacao = new Label("Localização da " + tipoCadastro + ":");
         TextField campoLocalizacao = new TextField();
-        campoNome.setPromptText("Digite a localização");
+        campoLocalizacao.setPromptText("Digite a localização");
 
         return new VBox(15, nome, campoNome, capacidade, campoCapacidade, localizacao, campoLocalizacao, btnSalvar);
     }
@@ -182,25 +182,59 @@ public class JavaFX extends Application {
 
         Label email = new Label("Email do " + tipoCadastro + ":");
         TextField campoEmail = new TextField();
-        campoNome.setPromptText("Digite o email");
+        campoEmail.setPromptText("Digite o email");
 
         Label telefone = new Label("Telefone do " + tipoCadastro + ":");
         TextField campoTelefone = new TextField();
-        campoNome.setPromptText("Digite o telefone");
+        campoTelefone.setPromptText("Digite o telefone");
 
         Label biografia = new Label("Biografia do " + tipoCadastro + ":");
         TextField campoBiografia = new TextField();
-        campoNome.setPromptText("Digite a biografia");
+        campoBiografia.setPromptText("Digite a biografia");
 
-        Label especialidade = new Label("Email do " + tipoCadastro + ":");
-        TextField campoEmail = new TextField();
-        campoNome.setPromptText("Digite o email");
+        Label especialidade = new Label("Especialidade do " + tipoCadastro + ":");
+        TextField campoEspecialidade = new TextField();
+        campoEspecialidade.setPromptText("Digite a especialiade");
 
         Label curriculo = new Label("Telefone do " + tipoCadastro + ":");
-        TextField campoTelefone = new TextField();
-        campoNome.setPromptText("Digite o telefone");
+        TextField campoCurriculo = new TextField();
+        campoCurriculo.setPromptText("Digite o curriculo");
 
-        return new VBox(15, nome, campoNome, capacidade, campoCapacidade, localizacao, campoLocalizacao, btnSalvar);
+        return new VBox(15, nome, campoNome, email, campoEmail, telefone, campoTelefone, biografia, campoBiografia, especialidade, campoEspecialidade, curriculo, campoCurriculo, btnSalvar);
+    }
+
+    public VBox camposSessao(Button btnSalvar, String tipoCadastro) {
+        Label titulo = new Label("Título da " + tipoCadastro + ":");
+        TextField campoTitulo = new TextField();
+        campoTitulo.setPromptText("Digite o nome");
+
+        Label descricao = new Label("Descrição do " + tipoCadastro + ":");
+        TextField campoDescricao = new TextField();
+        campoDescricao.setPromptText("Digite a descrição");
+
+        ToggleGroup tipos = new ToggleGroup();
+
+        Label tipo = new Label("Tipo da " + tipoCadastro + ":");
+
+        RadioButton palestra = new RadioButton("Palestra");
+        palestra.setToggleGroup(tipos);
+
+        RadioButton painel = new RadioButton("Painel");
+        painel.setToggleGroup(tipos);
+
+        RadioButton treinamento = new RadioButton("Treinamento");
+        treinamento.setToggleGroup(tipos);
+
+        Label resultado = new Label("Selecione uma opção");
+
+        tipos.selectedToggleProperty().addListener((obs, antigo, novo) -> {
+            if (novo != null) {
+                RadioButton selecionado = (RadioButton) tipos.getSelectedToggle();
+                resultado.setText("Selecionado: " + selecionado.getText());
+            }
+        });
+
+        return new VBox(15, titulo, campoTitulo, descricao, campoDescricao, tipo, palestra, painel, treinamento, btnSalvar);
     }
 
 }
