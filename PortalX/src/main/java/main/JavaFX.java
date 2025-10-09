@@ -1,5 +1,6 @@
 package main;
 
+import dao.EventoDAO;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,6 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import jdk.jfr.Event;
+import servico.EventoServico;
+
+import java.time.LocalDate;
 
 public class JavaFX extends Application {
 
@@ -151,31 +156,42 @@ public class JavaFX extends Application {
     }
 
     public VBox camposEvento(Button btnSalvar, String tipoCadastro) {
-        Label nome = new Label("Nome do " + tipoCadastro + ":");
+        Label nome = new Label("Nome:");
         TextField campoNome = new TextField();
         campoNome.setPromptText("Digite o nome");
 
-        Label descricao = new Label("Descrição do " + tipoCadastro + ":");
+        Label descricao = new Label("Descrição:");
         TextField campoDescricao = new TextField();
         campoDescricao.setPromptText("Digite a descrição");
 
-        Label endereco = new Label("Endereço do " + tipoCadastro + ":");
+        Label endereco = new Label("Endereço:");
         TextField campoEndereco = new TextField();
         campoEndereco.setPromptText("Digite o endereço");
 
-        return new VBox(15, nome, campoNome, descricao, campoDescricao, endereco, campoEndereco, btnSalvar);
+        Label dataInicio = new Label("Data de início:");
+        DatePicker datePickerInicio = new DatePicker();
+        LocalDate dataInicioSelecionada = datePickerInicio.getValue();
+
+        Label dataFim = new Label("Data de início:");
+        DatePicker datePickerFim = new DatePicker();
+        LocalDate dataFimSelecionada = datePickerFim.getValue();
+
+        EventoServico eventoServico = new EventoServico();
+        btnSalvar.setOnAction(e -> eventoServico.cadastrar(campoNome.getText(),campoDescricao.getText(),campoEndereco.getText(),dataInicioSelecionada,dataFimSelecionada));
+
+        return new VBox(15, nome, campoNome, descricao, campoDescricao, endereco, campoEndereco, dataInicio, datePickerInicio, dataFim, datePickerFim, btnSalvar);
     }
 
     public VBox camposSala(Button btnSalvar, String tipoCadastro) {
-        Label nome = new Label("Nome do " + tipoCadastro + ":");
+        Label nome = new Label("Nome:");
         TextField campoNome = new TextField();
         campoNome.setPromptText("Digite o nome");
 
-        Label capacidade = new Label("Capacidade da " + tipoCadastro + ":");
+        Label capacidade = new Label("Capacidade:");
         TextField campoCapacidade = new TextField();
         campoCapacidade.setPromptText("Digite a capacidade");
 
-        Label localizacao = new Label("Localização da " + tipoCadastro + ":");
+        Label localizacao = new Label("Localização:");
         TextField campoLocalizacao = new TextField();
         campoLocalizacao.setPromptText("Digite a localização");
 
@@ -183,27 +199,27 @@ public class JavaFX extends Application {
     }
 
     public VBox camposPalestrante(Button btnSalvar, String tipoCadastro) {
-        Label nome = new Label("Nome do " + tipoCadastro + ":");
+        Label nome = new Label("Nome:");
         TextField campoNome = new TextField();
         campoNome.setPromptText("Digite o nome completo");
 
-        Label email = new Label("Email do " + tipoCadastro + ":");
+        Label email = new Label("Email:");
         TextField campoEmail = new TextField();
         campoEmail.setPromptText("Digite o email");
 
-        Label telefone = new Label("Telefone do " + tipoCadastro + ":");
+        Label telefone = new Label("Telefone:");
         TextField campoTelefone = new TextField();
         campoTelefone.setPromptText("Digite o telefone");
 
-        Label biografia = new Label("Biografia do " + tipoCadastro + ":");
+        Label biografia = new Label("Biografia:");
         TextField campoBiografia = new TextField();
         campoBiografia.setPromptText("Digite a biografia");
 
-        Label especialidade = new Label("Especialidade do " + tipoCadastro + ":");
+        Label especialidade = new Label("Especialidade:");
         TextField campoEspecialidade = new TextField();
         campoEspecialidade.setPromptText("Digite a especialiade");
 
-        Label curriculo = new Label("Telefone do " + tipoCadastro + ":");
+        Label curriculo = new Label("Telefone:");
         TextField campoCurriculo = new TextField();
         campoCurriculo.setPromptText("Digite o curriculo");
 
@@ -211,17 +227,17 @@ public class JavaFX extends Application {
     }
 
     public VBox camposSessao(Button btnSalvar, String tipoCadastro) {
-        Label titulo = new Label("Título da " + tipoCadastro + ":");
+        Label titulo = new Label("Título:");
         TextField campoTitulo = new TextField();
         campoTitulo.setPromptText("Digite o nome");
 
-        Label descricao = new Label("Descrição do " + tipoCadastro + ":");
+        Label descricao = new Label("Descrição:");
         TextField campoDescricao = new TextField();
         campoDescricao.setPromptText("Digite a descrição");
 
         ToggleGroup tipos = new ToggleGroup();
 
-        Label tipo = new Label("Tipo da " + tipoCadastro + ":");
+        Label tipo = new Label("Tipo:");
 
         RadioButton palestra = new RadioButton("Palestra");
         palestra.setToggleGroup(tipos);

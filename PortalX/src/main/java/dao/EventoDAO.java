@@ -13,7 +13,5 @@ import model.Evento;
 
 
 public class EventoDAO extends DAOImplementacao<Evento, Long> {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenciaPU");
-
 
 }
