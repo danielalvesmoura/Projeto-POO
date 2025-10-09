@@ -12,12 +12,19 @@ public class JavaFX extends Application {
 
     private Stage stage;
 
+    int x = 1200;
+    int y = 700;
+
     @Override
     public void start(Stage primaryStage) {
         this.stage = primaryStage;
         stage.setTitle("Portal X");
+
+
         menuInicial();
         stage.show();
+
+
     }
 
     private void menuInicial() {
@@ -50,7 +57,7 @@ public class JavaFX extends Application {
 
 
 
-        Scene cena = new Scene(layout, 600, 400);
+        Scene cena = new Scene(layout, 1200, 700);
         stage.setScene(cena);
     }
 
@@ -97,7 +104,7 @@ public class JavaFX extends Application {
         layout.setLeft(sideBar);
         layout.setCenter(centro);
 
-        stage.setScene(new Scene(layout, 600, 400));
+        stage.setScene(new Scene(layout, x, y));
     }
 
     private void mostrarCadastro(String tipoCadastro) {
@@ -140,7 +147,7 @@ public class JavaFX extends Application {
         layout.setLeft(sideBar);
         layout.setCenter(centro);
 
-        stage.setScene(new Scene(layout, 600, 400));
+        stage.setScene(new Scene(layout, x, y));
     }
 
     public VBox camposEvento(Button btnSalvar, String tipoCadastro) {
