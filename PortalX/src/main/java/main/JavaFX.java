@@ -2,6 +2,7 @@ package main;
 
 import dao.EventoDAO;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 import jdk.jfr.Event;
 import servico.EventoServico;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class JavaFX extends Application {
@@ -25,11 +27,8 @@ public class JavaFX extends Application {
         this.stage = primaryStage;
         stage.setTitle("Portal X");
 
-
         menuInicial();
         stage.show();
-
-
     }
 
     private void menuInicial() {
@@ -59,8 +58,6 @@ public class JavaFX extends Application {
         layout.setTop(topBar);
         layout.setLeft(sideBar);
         layout.setCenter(centro);
-
-
 
         Scene cena = new Scene(layout, 1200, 700);
         stage.setScene(cena);
@@ -113,25 +110,29 @@ public class JavaFX extends Application {
     }
 
     private void mostrarCadastro(String tipoCadastro) {
-        Label titulo = new Label("Cadastro de " + tipoCadastro);
-        titulo.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
-        HBox topBar = new HBox(titulo);
-        topBar.setStyle("-fx-background-color: #2c3e50; -fx-padding: 15;");
-        topBar.setAlignment(Pos.CENTER_LEFT);
-
-        VBox sideBar = new VBox(10);
-        sideBar.setStyle("-fx-background-color: #ecf0f1; -fx-padding: 10;");
-        sideBar.setPrefWidth(150);
-
-        Button btnVoltar = new Button("Voltar");
-        btnVoltar.setMaxWidth(Double.MAX_VALUE);
-        btnVoltar.setOnAction(e -> menuCadastro());
-        sideBar.getChildren().add(btnVoltar);
-
+        HBox topBar = barraSuperior(tipoCadastro);
+        VBox sideBar = barraLateral(tipoCadastro);
 
         Button btnSalvar = new Button("Salvar");
         btnSalvar.setOnAction(e -> System.out.println(tipoCadastro + " salvo"));
 
+        VBox centro = mudaTela(tipoCadastro, btnSalvar);
+
+        BorderPane layout = criaLayout(topBar, sideBar, centro);
+
+        stage.setScene(new Scene(layout, x, y));
+    }
+
+    public BorderPane criaLayout(HBox topBar, VBox sideBar, VBox centro) {
+        BorderPane layout = new BorderPane();
+        layout.setTop(topBar);
+        layout.setLeft(sideBar);
+        layout.setCenter(centro);
+
+        return layout;
+    }
+
+    public VBox mudaTela(String tipoCadastro, Button btnSalvar) {
         VBox centro;
 
         if(tipoCadastro.equals("Evento")) {
@@ -147,13 +148,34 @@ public class JavaFX extends Application {
         centro.setAlignment(Pos.CENTER_LEFT);
         centro.setPadding(new Insets(20));
 
-        BorderPane layout = new BorderPane();
-        layout.setTop(topBar);
-        layout.setLeft(sideBar);
-        layout.setCenter(centro);
-
-        stage.setScene(new Scene(layout, x, y));
+        return centro;
     }
+
+    public HBox barraSuperior(String tipoCadastro) {
+        Label titulo = new Label("Cadastro de " + tipoCadastro);
+        titulo.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
+
+        HBox topBar = new HBox(titulo);
+        topBar.setStyle("-fx-background-color: #2c3e50; -fx-padding: 15;");
+        topBar.setAlignment(Pos.CENTER_LEFT);
+
+        return topBar;
+    }
+
+    public VBox barraLateral(String tipoCadastro) {
+        VBox sideBar = new VBox(10);
+        sideBar.setStyle("-fx-background-color: #ecf0f1; -fx-padding: 10;");
+        sideBar.setPrefWidth(150);
+
+        Button btnVoltar = new Button("Voltar");
+        btnVoltar.setMaxWidth(Double.MAX_VALUE);
+        btnVoltar.setOnAction(e -> menuCadastro());
+        sideBar.getChildren().add(btnVoltar);
+
+        return sideBar;
+    }
+
+
 
     public VBox camposEvento(Button btnSalvar, String tipoCadastro) {
         Label nome = new Label("Nome:");
@@ -175,9 +197,6 @@ public class JavaFX extends Application {
         Label dataFim = new Label("Data de início:");
         DatePicker datePickerFim = new DatePicker();
         LocalDate dataFimSelecionada = datePickerFim.getValue();
-
-        EventoServico eventoServico = new EventoServico();
-        btnSalvar.setOnAction(e -> eventoServico.cadastrar(campoNome.getText(),campoDescricao.getText(),campoEndereco.getText(),dataInicioSelecionada,dataFimSelecionada));
 
         return new VBox(15, nome, campoNome, descricao, campoDescricao, endereco, campoEndereco, dataInicio, datePickerInicio, dataFim, datePickerFim, btnSalvar);
     }
