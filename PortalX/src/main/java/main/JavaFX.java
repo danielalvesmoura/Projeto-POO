@@ -63,19 +63,48 @@ public class JavaFX extends Application {
         stage.setScene(cena);
     }
 
+
+
+
     private void menuCadastro() {
-        Label titulo = new Label("Cadastros");
-        titulo.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
-
-        HBox topBar = new HBox(titulo);
-        topBar.setStyle("-fx-background-color: #2c3e50; -fx-padding: 15;");
-
-        topBar.setAlignment(Pos.CENTER_LEFT);
+        HBox topBar = barraSuperiorCadastro();
 
         VBox sideBar = new VBox(10);
         sideBar.setStyle("-fx-background-color: #ecf0f1; -fx-padding: 10;");
         sideBar.setPrefWidth(150);
 
+        criaBotoesCadastro(sideBar);
+
+        BorderPane layout = criaLayoutCadastro(topBar, sideBar);
+
+        stage.setScene(new Scene(layout, x, y));
+    }
+
+    public BorderPane criaLayoutCadastro(HBox topBar, VBox sideBar) {
+        Label msg = new Label("Escolha uma opção de cadastro.");
+        msg.setStyle("-fx-font-size: 16px;");
+        StackPane centro = new StackPane(msg);
+        centro.setPadding(new Insets(20));
+
+        BorderPane layout = new BorderPane();
+        layout.setTop(topBar);
+        layout.setLeft(sideBar);
+        layout.setCenter(centro);
+
+        return layout;
+    }
+
+    public HBox barraSuperiorCadastro() {
+        Label titulo = new Label("Cadastros");
+        titulo.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
+        HBox topBar = new HBox(titulo);
+        topBar.setStyle("-fx-background-color: #2c3e50; -fx-padding: 15;");
+        topBar.setAlignment(Pos.CENTER_LEFT);
+
+        return topBar;
+    }
+
+    public void criaBotoesCadastro(VBox sideBar) {
         Button btnEvento = new Button("Evento");
         Button btnSala = new Button("Sala");
         Button btnPalestrante = new Button("Palestrante");
@@ -95,32 +124,30 @@ public class JavaFX extends Application {
         btnSessao.setOnAction(e -> mostrarCadastro("Sessão"));
 
         sideBar.getChildren().addAll(btnEvento, btnSala, btnPalestrante, btnSessao,btnVoltarInicial);
-
-        Label msg = new Label("Escolha uma opção de cadastro.");
-        msg.setStyle("-fx-font-size: 16px;");
-        StackPane centro = new StackPane(msg);
-        centro.setPadding(new Insets(20));
-
-        BorderPane layout = new BorderPane();
-        layout.setTop(topBar);
-        layout.setLeft(sideBar);
-        layout.setCenter(centro);
-
-        stage.setScene(new Scene(layout, x, y));
     }
+
+
+
 
     private void mostrarCadastro(String tipoCadastro) {
         HBox topBar = barraSuperior(tipoCadastro);
         VBox sideBar = barraLateral(tipoCadastro);
 
         Button btnSalvar = new Button("Salvar");
-        btnSalvar.setOnAction(e -> System.out.println(tipoCadastro + " salvo"));
 
         VBox centro = mudaTela(tipoCadastro, btnSalvar);
+
+        btnSalvar.setOnAction(e -> salvarCadastro(tipoCadastro, centro));
 
         BorderPane layout = criaLayout(topBar, sideBar, centro);
 
         stage.setScene(new Scene(layout, x, y));
+    }
+
+    public void salvarCadastro(String tipoCadastro, VBox centro) {
+        if(tipoCadastro.equals("Evento")) {
+
+        }
     }
 
     public BorderPane criaLayout(HBox topBar, VBox sideBar, VBox centro) {
