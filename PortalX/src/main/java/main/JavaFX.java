@@ -11,6 +11,11 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import jdk.jfr.Event;
 import servico.EventoServico;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -27,7 +32,11 @@ public class JavaFX extends Application {
         this.stage = primaryStage;
         stage.setTitle("Portal X");
 
-        menuInicial();
+        Parent root = FXMLLoader.load(getClass().getResource("teste.fxml"));
+
+        //menuInicial();
+        stage.setScene(root);
+
         stage.show();
     }
 
