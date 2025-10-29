@@ -1,6 +1,5 @@
 package main;
 
-import dao.EventoDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -9,13 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import jdk.jfr.Event;
-import servico.EventoServico;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -28,14 +21,16 @@ public class JavaFX extends Application {
     int y = 700;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         this.stage = primaryStage;
         stage.setTitle("Portal X");
 
-        Parent root = FXMLLoader.load(getClass().getResource("teste.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/asdf/teste.fxml"));
 
-        //menuInicial();
-        stage.setScene(root);
+        Scene scene = new Scene(root);  // ✅ CORRETO
+        stage.setScene(scene);
+
+        stage.setFullScreen(true);
 
         stage.show();
     }
