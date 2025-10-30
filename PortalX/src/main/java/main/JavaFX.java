@@ -28,13 +28,13 @@ public class JavaFX extends Application {
         this.stage = primaryStage;
         stage.setTitle("Portal X");
 
-        Parent root = FXMLLoader.load(getClass().getResource("/asdf/teste.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/asdf/secaoDashboard.fxml"));
 
         Scene scene = new Scene(root);  // ✅ CORRETO
 
         URL css = getClass().getResource("/asdf/style.css");
         if(css!=null) scene.getStylesheets().add(css.toExternalForm());
-        else System.out.println("Tomou no furico");
+        else System.out.println("nao funfou");
 
         scene.getStylesheets().add(getClass().getResource("/asdf/style.css").toExternalForm());
         stage.setScene(scene);
