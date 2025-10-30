@@ -1,9 +1,8 @@
-package main;
+package main.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
-public class Controller {
+public class SecaoDashboard {
 
     @FXML
     private void botaoClicado() {
