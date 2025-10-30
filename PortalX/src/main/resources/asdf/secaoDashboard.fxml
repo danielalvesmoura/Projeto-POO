@@ -18,5 +18,11 @@
                   <Font size="43.0" />
                </font></Button>
          </children></Pane>
+      <TableView layoutX="420.0" layoutY="168.0" prefHeight="892.0" prefWidth="1474.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
