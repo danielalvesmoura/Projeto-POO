@@ -1,5 +1,7 @@
 package main;
 
+
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -11,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 
 public class JavaFX extends Application {
@@ -28,6 +31,12 @@ public class JavaFX extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/asdf/teste.fxml"));
 
         Scene scene = new Scene(root);  // ✅ CORRETO
+
+        URL css = getClass().getResource("/asdf/style.css");
+        if(css!=null) scene.getStylesheets().add(css.toExternalForm());
+        else System.out.println("Tomou no furico");
+
+        scene.getStylesheets().add(getClass().getResource("/asdf/style.css").toExternalForm());
         stage.setScene(scene);
 
         stage.setFullScreen(true);
